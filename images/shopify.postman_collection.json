@@ -1,0 +1,1938 @@
+{
+	"openapi": "3.0.1",
+	"info": {
+		"title": "OpenAPI definition",
+		"version": "v0"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:8085",
+			"description": "Generated server url"
+		}
+	],
+	"paths": {
+		"/webhook/orders/create": {
+			"post": {
+				"tags": [
+					"shopify-webhook-controller"
+				],
+				"operationId": "handleOrderCreate",
+				"parameters": [
+					{
+						"name": "X-Shopify-Hmac-Sha256",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "string"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		},
+		"/webhook/fulfillment/create": {
+			"post": {
+				"tags": [
+					"shopify-webhook-controller"
+				],
+				"operationId": "handleFulFillmentCreate",
+				"parameters": [
+					{
+						"name": "X-Shopify-Hmac-Sha256",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "string"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		},
+		"/shopify/orders/open": {
+			"post": {
+				"tags": [
+					"shopify-controller"
+				],
+				"operationId": "openOrder",
+				"parameters": [
+					{
+						"name": "orderId",
+						"in": "query",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/shopify/orders/create": {
+			"post": {
+				"tags": [
+					"shopify-controller"
+				],
+				"operationId": "createOrder",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "string"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/shopify/orders/close": {
+			"post": {
+				"tags": [
+					"shopify-controller"
+				],
+				"operationId": "closeOrder",
+				"parameters": [
+					{
+						"name": "orderId",
+						"in": "query",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/shopify/orders/cancel": {
+			"post": {
+				"tags": [
+					"shopify-controller"
+				],
+				"operationId": "cancelOrder",
+				"parameters": [
+					{
+						"name": "orderId",
+						"in": "query",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/orders/{tenantId}": {
+			"get": {
+				"tags": [
+					"order-controller"
+				],
+				"operationId": "getAllOrders",
+				"parameters": [
+					{
+						"name": "tenantId",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/Order"
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"post": {
+				"tags": [
+					"order-controller"
+				],
+				"operationId": "createOrder_1",
+				"parameters": [
+					{
+						"name": "tenantId",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Order"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/Order"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/fulfillments/{tenantId}": {
+			"get": {
+				"tags": [
+					"fulfillment-controller"
+				],
+				"operationId": "getAllFulfillment",
+				"parameters": [
+					{
+						"name": "tenantId",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/Fulfillment"
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"post": {
+				"tags": [
+					"fulfillment-controller"
+				],
+				"operationId": "createFulfillment",
+				"parameters": [
+					{
+						"name": "tenantId",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Fulfillment"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/Fulfillment"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/fulfillments/update/{tenantId}/{id}": {
+			"post": {
+				"tags": [
+					"fulfillment-controller"
+				],
+				"operationId": "updateFulfillment",
+				"parameters": [
+					{
+						"name": "tenantId",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Fulfillment"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/Fulfillment"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/fulfillments/cancel/{tenantId}/{id}": {
+			"post": {
+				"tags": [
+					"fulfillment-controller"
+				],
+				"operationId": "cancelFulfillment",
+				"parameters": [
+					{
+						"name": "tenantId",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/Fulfillment"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/shopify/orders": {
+			"get": {
+				"tags": [
+					"shopify-controller"
+				],
+				"operationId": "getAllOrderDetails",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/shopify/orders/{orderId}": {
+			"get": {
+				"tags": [
+					"shopify-controller"
+				],
+				"operationId": "getOrderDetails",
+				"parameters": [
+					{
+						"name": "orderId",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/shopify/orders/{orderId}/fulfillments": {
+			"get": {
+				"tags": [
+					"shopify-controller"
+				],
+				"operationId": "getAllFulfillmentDetails",
+				"parameters": [
+					{
+						"name": "orderId",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/shopify/orders/{orderId}/fulfillments/{fulfillmentId}": {
+			"get": {
+				"tags": [
+					"shopify-controller"
+				],
+				"operationId": "getFulfillmentDetails",
+				"parameters": [
+					{
+						"name": "orderId",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
+					{
+						"name": "fulfillmentId",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/shopify/orders/{orderId}/fulfillments/count": {
+			"get": {
+				"tags": [
+					"shopify-controller"
+				],
+				"operationId": "getFulfillmentCount",
+				"parameters": [
+					{
+						"name": "orderId",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/shopify/orders/count": {
+			"get": {
+				"tags": [
+					"shopify-controller"
+				],
+				"operationId": "getOrderCount",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/orders/{tenantId}/{id}": {
+			"get": {
+				"tags": [
+					"order-controller"
+				],
+				"operationId": "getOrder",
+				"parameters": [
+					{
+						"name": "tenantId",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/Order"
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": [
+					"order-controller"
+				],
+				"operationId": "deleteOrder_1",
+				"parameters": [
+					{
+						"name": "tenantId",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		},
+		"/orders/test": {
+			"get": {
+				"tags": [
+					"order-controller"
+				],
+				"operationId": "test",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/fulfillments/{tenantId}/{id}": {
+			"get": {
+				"tags": [
+					"fulfillment-controller"
+				],
+				"operationId": "getFulfillment",
+				"parameters": [
+					{
+						"name": "tenantId",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/Fulfillment"
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": [
+					"fulfillment-controller"
+				],
+				"operationId": "deleteOrder_2",
+				"parameters": [
+					{
+						"name": "tenantId",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		},
+		"/fulfillments/{tenantId}/{id}/{orderId}": {
+			"get": {
+				"tags": [
+					"fulfillment-controller"
+				],
+				"operationId": "getFulfillmentByOrderId",
+				"parameters": [
+					{
+						"name": "tenantId",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
+					{
+						"name": "orderId",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/Fulfillment"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/shopify/orders/delete": {
+			"delete": {
+				"tags": [
+					"shopify-controller"
+				],
+				"operationId": "deleteOrder",
+				"parameters": [
+					{
+						"name": "orderId",
+						"in": "query",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"Address": {
+				"type": "object",
+				"properties": {
+					"address1": {
+						"type": "string"
+					},
+					"address2": {
+						"type": "string"
+					},
+					"city": {
+						"type": "string"
+					},
+					"company": {
+						"type": "string"
+					},
+					"country": {
+						"type": "string"
+					},
+					"first_name": {
+						"type": "string"
+					},
+					"last_name": {
+						"type": "string"
+					},
+					"latitude": {
+						"type": "string"
+					},
+					"longitude": {
+						"type": "string"
+					},
+					"phone": {
+						"type": "string"
+					},
+					"province": {
+						"type": "string"
+					},
+					"zip": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"country_code": {
+						"type": "string"
+					},
+					"province_code": {
+						"type": "string"
+					}
+				}
+			},
+			"AttributedStaff": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"quantity": {
+						"type": "integer",
+						"format": "int32"
+					}
+				}
+			},
+			"BillingAddress": {
+				"type": "object",
+				"properties": {
+					"address1": {
+						"type": "string"
+					},
+					"address2": {
+						"type": "string"
+					},
+					"city": {
+						"type": "string"
+					},
+					"company": {
+						"type": "string"
+					},
+					"country": {
+						"type": "string"
+					},
+					"first_name": {
+						"type": "string"
+					},
+					"last_name": {
+						"type": "string"
+					},
+					"phone": {
+						"type": "string"
+					},
+					"province": {
+						"type": "string"
+					},
+					"zip": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"province_code": {
+						"type": "string"
+					},
+					"country_code": {
+						"type": "string"
+					},
+					"latitude": {
+						"type": "string"
+					},
+					"longitude": {
+						"type": "string"
+					}
+				}
+			},
+			"ClientDetails": {
+				"type": "object",
+				"properties": {
+					"accept_language": {
+						"type": "string"
+					},
+					"browser_height": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"browser_ip": {
+						"type": "string"
+					},
+					"browser_width": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"session_hash": {
+						"type": "string"
+					},
+					"user_agent": {
+						"type": "string"
+					}
+				}
+			},
+			"Company": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"location_id": {
+						"type": "integer",
+						"format": "int64"
+					}
+				}
+			},
+			"Current_total_duties_set": {
+				"type": "object",
+				"properties": {
+					"current_total_duties_set": {
+						"$ref": "#/components/schemas/MoneySet"
+					}
+				}
+			},
+			"Customer": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"email": {
+						"type": "string"
+					},
+					"accepts_marketing": {
+						"type": "boolean"
+					},
+					"created_at": {
+						"type": "string"
+					},
+					"updated_at": {
+						"type": "string"
+					},
+					"first_name": {
+						"type": "string"
+					},
+					"last_name": {
+						"type": "string"
+					},
+					"state": {
+						"type": "string"
+					},
+					"note": {
+						"type": "string"
+					},
+					"verified_email": {
+						"type": "boolean"
+					},
+					"multipass_identifier": {
+						"type": "string"
+					},
+					"tax_exempt": {
+						"type": "boolean"
+					},
+					"phone": {
+						"type": "string"
+					},
+					"tags": {
+						"type": "string"
+					},
+					"currency": {
+						"type": "string"
+					},
+					"tax_exemptions": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"email_marketing_consent": {
+						"type": "object"
+					},
+					"sms_marketing_consent": {
+						"type": "string"
+					},
+					"addresses": {
+						"type": "object",
+						"additionalProperties": {
+							"type": "object"
+						}
+					},
+					"admin_graphql_api_id": {
+						"type": "string"
+					},
+					"default_address": {
+						"type": "object",
+						"additionalProperties": {
+							"type": "object"
+						}
+					}
+				}
+			},
+			"DiscountAllocation": {
+				"type": "object",
+				"properties": {
+					"amount": {
+						"type": "string"
+					},
+					"discount_application_index": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"amount_set": {
+						"$ref": "#/components/schemas/MoneySet"
+					}
+				}
+			},
+			"DiscountApplication": {
+				"type": "object",
+				"properties": {
+					"type": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"value": {
+						"type": "string"
+					},
+					"value_type": {
+						"type": "string"
+					},
+					"allocation_method": {
+						"type": "string"
+					},
+					"target_selection": {
+						"type": "string"
+					},
+					"target_type": {
+						"type": "string"
+					}
+				}
+			},
+			"DiscountCode": {
+				"type": "object",
+				"properties": {
+					"code": {
+						"type": "string"
+					},
+					"amount": {
+						"type": "string"
+					},
+					"type": {
+						"type": "string"
+					}
+				}
+			},
+			"Duty": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"harmonized_system_code": {
+						"type": "string"
+					},
+					"country_code_of_origin": {
+						"type": "string"
+					},
+					"shop_money": {
+						"$ref": "#/components/schemas/Money"
+					},
+					"presentment_money": {
+						"$ref": "#/components/schemas/Money"
+					},
+					"tax_lines": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/TaxLine"
+						}
+					},
+					"admin_graphql_api_id": {
+						"type": "string"
+					}
+				}
+			},
+			"Fulfillment": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"created_at": {
+						"type": "string"
+					},
+					"line_items": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/LineItem"
+						}
+					},
+					"tenantId": {
+						"type": "string"
+					},
+					"location_id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"name": {
+						"type": "string"
+					},
+					"order_id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"origin_address": {
+						"$ref": "#/components/schemas/Address"
+					},
+					"receipt": {
+						"$ref": "#/components/schemas/Receipt"
+					},
+					"service": {
+						"type": "string"
+					},
+					"shipment_status": {
+						"type": "string"
+					},
+					"status": {
+						"type": "string"
+					},
+					"tracking_company": {
+						"type": "string"
+					},
+					"tracking_numbers": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"tracking_number": {
+						"type": "string"
+					},
+					"tracking_urls": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"tracking_url": {
+						"type": "string"
+					},
+					"updated_at": {
+						"type": "string"
+					},
+					"variant_inventory_management": {
+						"type": "string"
+					},
+					"destination": {
+						"type": "object"
+					},
+					"admin_graphql_api_id": {
+						"type": "string"
+					},
+					"notify_customer": {
+						"type": "boolean"
+					},
+					"tracking_info": {
+						"type": "object"
+					}
+				}
+			},
+			"LineItem": {
+				"type": "object",
+				"properties": {
+					"attributed_staffs": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/AttributedStaff"
+						}
+					},
+					"fulfillable_quantity": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"fulfillment_service": {
+						"type": "string"
+					},
+					"fulfillment_status": {
+						"type": "string"
+					},
+					"grams": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"price": {
+						"type": "string"
+					},
+					"product_id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"quantity": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"current_quantity": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"requires_shipping": {
+						"type": "boolean"
+					},
+					"sku": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"variant_id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"variant_title": {
+						"type": "string"
+					},
+					"vendor": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"gift_card": {
+						"type": "boolean"
+					},
+					"product_exists": {
+						"type": "boolean"
+					},
+					"price_set": {
+						"$ref": "#/components/schemas/MoneySet"
+					},
+					"properties": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Property"
+						}
+					},
+					"taxable": {
+						"type": "boolean"
+					},
+					"tax_lines": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/TaxLine"
+						}
+					},
+					"total_discount": {
+						"type": "string"
+					},
+					"total_discount_set": {
+						"$ref": "#/components/schemas/MoneySet"
+					},
+					"discount_allocations": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/DiscountAllocation"
+						}
+					},
+					"origin_location": {
+						"$ref": "#/components/schemas/OriginLocation"
+					},
+					"duties": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Duty"
+						}
+					},
+					"admin_graphql_api_id": {
+						"type": "string"
+					},
+					"variant_inventory_management": {
+						"type": "string"
+					}
+				}
+			},
+			"Money": {
+				"type": "object",
+				"properties": {
+					"amount": {
+						"type": "string"
+					},
+					"currency_code": {
+						"type": "string"
+					}
+				}
+			},
+			"MoneySet": {
+				"type": "object",
+				"properties": {
+					"shop_money": {
+						"$ref": "#/components/schemas/Money"
+					},
+					"presentment_money": {
+						"$ref": "#/components/schemas/Money"
+					}
+				}
+			},
+			"NoteAttribute": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"value": {
+						"type": "string"
+					}
+				}
+			},
+			"Order": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"tenantId": {
+						"type": "string"
+					},
+					"tax_exempt": {
+						"type": "string"
+					},
+					"reference": {
+						"type": "string"
+					},
+					"landing_site_ref": {
+						"type": "string"
+					},
+					"device_id": {
+						"type": "string"
+					},
+					"admin_graphql_api_id": {
+						"type": "string"
+					},
+					"checkout_id": {
+						"type": "string"
+					},
+					"app_id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"billing_address": {
+						"$ref": "#/components/schemas/BillingAddress"
+					},
+					"browser_ip": {
+						"type": "string"
+					},
+					"buyer_accepts_marketing": {
+						"type": "boolean"
+					},
+					"cancel_reason": {
+						"type": "string"
+					},
+					"cancelled_at": {
+						"type": "string"
+					},
+					"cart_token": {
+						"type": "string"
+					},
+					"checkout_token": {
+						"type": "string"
+					},
+					"client_details": {
+						"$ref": "#/components/schemas/ClientDetails"
+					},
+					"closed_at": {
+						"type": "string"
+					},
+					"company": {
+						"$ref": "#/components/schemas/Company"
+					},
+					"confirmation_number": {
+						"type": "string"
+					},
+					"confirmed": {
+						"type": "boolean"
+					},
+					"created_at": {
+						"type": "string"
+					},
+					"currency": {
+						"type": "string"
+					},
+					"current_total_additional_fees_set": {
+						"$ref": "#/components/schemas/MoneySet"
+					},
+					"current_total_discounts": {
+						"type": "string"
+					},
+					"current_total_discounts_set": {
+						"$ref": "#/components/schemas/MoneySet"
+					},
+					"current_total_duties_set": {
+						"$ref": "#/components/schemas/Current_total_duties_set"
+					},
+					"current_total_price": {
+						"type": "string"
+					},
+					"current_total_price_set": {
+						"$ref": "#/components/schemas/MoneySet"
+					},
+					"current_subtotal_price": {
+						"type": "string"
+					},
+					"current_subtotal_price_set": {
+						"$ref": "#/components/schemas/MoneySet"
+					},
+					"current_total_tax": {
+						"type": "string"
+					},
+					"current_total_tax_set": {
+						"$ref": "#/components/schemas/MoneySet"
+					},
+					"customer": {
+						"$ref": "#/components/schemas/Customer"
+					},
+					"customer_locale": {
+						"type": "string"
+					},
+					"discount_applications": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/DiscountApplication"
+						}
+					},
+					"discount_codes": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/DiscountCode"
+						}
+					},
+					"email": {
+						"type": "string"
+					},
+					"estimated_taxes": {
+						"type": "boolean"
+					},
+					"financial_status": {
+						"type": "string"
+					},
+					"fulfillments": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Fulfillment"
+						}
+					},
+					"fulfillment_status": {
+						"type": "string"
+					},
+					"gateway": {
+						"type": "string"
+					},
+					"landing_site": {
+						"type": "string"
+					},
+					"line_items": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/LineItem"
+						}
+					},
+					"location_id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"merchant_of_record_app_id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"name": {
+						"type": "string"
+					},
+					"note": {
+						"type": "string"
+					},
+					"note_attributes": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/NoteAttribute"
+						}
+					},
+					"number": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"order_number": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"original_total_additional_fees_set": {
+						"$ref": "#/components/schemas/MoneySet"
+					},
+					"original_total_duties_set": {
+						"$ref": "#/components/schemas/Original_total_duties_set"
+					},
+					"payment_terms": {
+						"$ref": "#/components/schemas/PaymentTerms"
+					},
+					"payment_gateway_names": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"phone": {
+						"type": "string"
+					},
+					"po_number": {
+						"type": "string"
+					},
+					"presentment_currency": {
+						"type": "string"
+					},
+					"processed_at": {
+						"type": "string"
+					},
+					"referring_site": {
+						"type": "string"
+					},
+					"refunds": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Refund"
+						}
+					},
+					"shipping_address": {
+						"$ref": "#/components/schemas/Address"
+					},
+					"shipping_lines": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/ShippingLine"
+						}
+					},
+					"source_name": {
+						"type": "string"
+					},
+					"source_identifier": {
+						"type": "string"
+					},
+					"source_url": {
+						"type": "string"
+					},
+					"subtotal_price": {
+						"type": "string"
+					},
+					"subtotal_price_set": {
+						"$ref": "#/components/schemas/MoneySet"
+					},
+					"tags": {
+						"type": "string"
+					},
+					"tax_lines": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/TaxLine"
+						}
+					},
+					"taxes_included": {
+						"type": "boolean"
+					},
+					"test": {
+						"type": "boolean"
+					},
+					"token": {
+						"type": "string"
+					},
+					"total_discounts": {
+						"type": "string"
+					},
+					"total_discounts_set": {
+						"$ref": "#/components/schemas/MoneySet"
+					},
+					"total_line_items_price": {
+						"type": "string"
+					},
+					"total_line_items_price_set": {
+						"$ref": "#/components/schemas/MoneySet"
+					},
+					"total_outstanding": {
+						"type": "string"
+					},
+					"total_price": {
+						"type": "string"
+					},
+					"total_price_set": {
+						"$ref": "#/components/schemas/MoneySet"
+					},
+					"total_shipping_price_set": {
+						"$ref": "#/components/schemas/MoneySet"
+					},
+					"total_tax": {
+						"type": "string"
+					},
+					"total_tax_set": {
+						"$ref": "#/components/schemas/MoneySet"
+					},
+					"total_tip_received": {
+						"type": "string"
+					},
+					"total_weight": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"updated_at": {
+						"type": "string"
+					},
+					"user_id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"order_status_url": {
+						"$ref": "#/components/schemas/OrderStatusUrl"
+					}
+				}
+			},
+			"OrderStatusUrl": {
+				"type": "object",
+				"properties": {
+					"order_status_url": {
+						"type": "string"
+					}
+				}
+			},
+			"OriginLocation": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"country_code": {
+						"type": "string"
+					},
+					"province_code": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"address1": {
+						"type": "string"
+					},
+					"address2": {
+						"type": "string"
+					},
+					"city": {
+						"type": "string"
+					},
+					"zip": {
+						"type": "string"
+					}
+				}
+			},
+			"Original_total_duties_set": {
+				"type": "object",
+				"properties": {
+					"original_total_duties_set": {
+						"$ref": "#/components/schemas/MoneySet"
+					}
+				}
+			},
+			"PaymentSchedule": {
+				"type": "object",
+				"properties": {
+					"amount": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"currency": {
+						"type": "string"
+					},
+					"issued_at": {
+						"type": "string"
+					},
+					"due_at": {
+						"type": "string"
+					},
+					"completed_at": {
+						"type": "string"
+					},
+					"expected_payment_method": {
+						"type": "string"
+					}
+				}
+			},
+			"PaymentTerms": {
+				"type": "object",
+				"properties": {
+					"amount": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"currency": {
+						"type": "string"
+					},
+					"payment_terms_name": {
+						"type": "string"
+					},
+					"payment_terms_type": {
+						"type": "string"
+					},
+					"due_in_days": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"payment_schedules": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/PaymentSchedule"
+						}
+					}
+				}
+			},
+			"Property": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"value": {
+						"type": "string"
+					}
+				}
+			},
+			"Receipt": {
+				"type": "object",
+				"properties": {
+					"testcase": {
+						"type": "boolean"
+					},
+					"authorization": {
+						"type": "string"
+					}
+				}
+			},
+			"Refund": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"order_id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"created_at": {
+						"type": "string"
+					},
+					"note": {
+						"type": "string"
+					},
+					"user_id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"processed_at": {
+						"type": "string"
+					},
+					"refund_line_items": {
+						"type": "array",
+						"items": {
+							"type": "object"
+						}
+					},
+					"transactions": {
+						"type": "array",
+						"items": {
+							"type": "object"
+						}
+					},
+					"order_adjustments": {
+						"type": "array",
+						"items": {
+							"type": "object"
+						}
+					}
+				}
+			},
+			"ShippingLine": {
+				"type": "object",
+				"properties": {
+					"code": {
+						"type": "string"
+					},
+					"price": {
+						"type": "string"
+					},
+					"price_set": {
+						"$ref": "#/components/schemas/MoneySet"
+					},
+					"discounted_price": {
+						"type": "string"
+					},
+					"discounted_price_set": {
+						"$ref": "#/components/schemas/MoneySet"
+					},
+					"source": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"tax_lines": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/TaxLine"
+						}
+					},
+					"carrier_identifier": {
+						"type": "string"
+					},
+					"requested_fulfillment_service_id": {
+						"type": "string"
+					},
+					"is_removed": {
+						"type": "boolean"
+					}
+				}
+			},
+			"TaxLine": {
+				"type": "object",
+				"properties": {
+					"price": {
+						"type": "number",
+						"format": "double"
+					},
+					"rate": {
+						"type": "number",
+						"format": "double"
+					},
+					"title": {
+						"type": "string"
+					},
+					"channel_liable": {
+						"type": "boolean"
+					}
+				}
+			}
+		}
+	}
+}
