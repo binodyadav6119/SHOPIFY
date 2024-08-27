@@ -84,8 +84,8 @@ Before you begin, ensure you have the following installed:
 - **Once we reciebe order details in shopify spring app we will store in elastic search**
 - **We can fullfill the order we will recieve the fullfillment in different controller exposed in shopify spring app**
 - **We can store that fulfillment data in elastic search**
-<br>
-<br>
+- **When order is created we will recieve order details in our mail as shown in below image**
+  ![Application Architecture](./images/order.png)
 - **I have exposed different api's to be ingested by UI team for doing crud on that order data as well for fulfillment data**
 - **Also exposed different api's for order and fulfillment globally for shopify website**
 
