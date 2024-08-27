@@ -20,14 +20,15 @@ Before you begin, ensure you have the following installed:
 
 
    ```bash
+   
    docker pull docker.elastic.co/elasticsearch/elasticsearch:8.14.2
    
    docker run -d --name elasticsearch \
--p 9200:9200 \
--e "discovery.type=single-node" \
--e "xpack.security.enabled=false" \
--e "ES_JAVA_OPTS=-Xms2g -Xmx2g" \
-docker.elastic.co/elasticsearch/elasticsearch:8.14.2
+  -p 9200:9200 \
+  -e "discovery.type=single-node" \
+  -e "xpack.security.enabled=false" \
+  -e "ES_JAVA_OPTS=-Xms2g -Xmx2g" \
+  docker.elastic.co/elasticsearch/elasticsearch:8.14.2
 
 ```
 ## ngrok setup
@@ -77,7 +78,20 @@ docker.elastic.co/elasticsearch/elasticsearch:8.14.2
    }'
 
   ```
-  
+
+- **Once the webhook urls is created create product in shopify website and then create the order after order is created we will get order details in shopify springboot app via shopify webhook controller**
+- **Once we reciebe order details in shopify spring app we will store in elastic search**
+- **We can fullfill the order we will recieve the fullfillment in different controller exposed in shopify spring app**
+- **We can store that fulfillment data in elastic search**
+<br>
+<br>
+- **I have exposed different api's to be ingested by UI team for doing crud on that order data as well for fulfillment data**
+- **Also exposed different api's for order and fulfillment globally for shopify website**
+
+
+
+
+
 ## Url for api docs
 http://localhost:8085/v3/api-docs
 
@@ -89,9 +103,28 @@ http://localhost:8085/swagger-ui/index.html
 ![Application Architecture](./images/controller2.png)
 
 ## Created Dockerfile for creating image of shopify
+Open [`Dockerfile`](./Dockerfile) (for Dockerfile)  you can create the image using the docker file
+```bash
+mvn clean install 
+docker build -t shopify .
+docker tag shopify <dockerhubUsername>/<repo>:<tag>
+docker push <dockerhubUsername>/<repo>:<tag>
+
+```
 ## Created Deployment and service file for elasticsearch8.14.2
+Open [`elastic-deployment.yaml`](./elastic-deployment.yaml)  you can create the elastic search pod running using kubernetes
+```bash
+kubectl apply -f elastic-deployment.yaml
+
+```
 ## Craeted Deployment and service file for shopify springboot service
 
+Open [`shopify-deployment.yaml`](./shopify-deployment.yaml)  you can create the shopify sprinboot app pod running using kubernetes
+Replace image name in line no 19 with your created image
+```bash
+kubectl apply -f shopify-deployment.yaml
+
+```
 ## API Documentation
 
 To view the API documentation, follow these steps:
