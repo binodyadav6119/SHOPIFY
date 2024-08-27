@@ -31,16 +31,17 @@ Before you begin, ensure you have the following installed:
   docker.elastic.co/elasticsearch/elasticsearch:8.14.2
 
 ```
+
 ## ngrok setup
 
 **To sync order and fulfillment data**
 - **whenever order is created in shopify we will receieve that particular order data via webhook exposed to creating the order**
-</br>
+
 - **Processing of configuring ngrok**
    ```bash
-   sudo snap install ngrok
-  ngrok config add-authtoken YOUR_AUTHTOKEN
-   ngrok http 8085(springboot exposed port)
+    sudo snap install ngrok
+    ngrok config add-authtoken YOUR_AUTHTOKEN
+    ngrok http 8085(springboot exposed port)
   ```
 
 ## Webhook Url Creation For Order data
